@@ -30,3 +30,4 @@ Extension to Ultimate Member for integration of the "Really Simple CAPTCHA" plug
 
 ## Updates
 1. Version 1.0.0
+2. Version 1.1.0 bug fix
