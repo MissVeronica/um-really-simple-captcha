@@ -7,9 +7,9 @@ Extension to Ultimate Member for integration of the "Really Simple CAPTCHA" plug
 3. Download and activate the "Really Simple CAPTCHA" plugin from:
 4. https://wordpress.org/plugins/really-simple-captcha/
 
-## UM Registration Form
+## UM Registration and/or Login Form
 1. Add a Text field from the UM Form Builder Predefined fields with the name "Really Simple CAPTCHA"
-2. Save/Update the UM Registration Form.
+2. Save/Update the UM Form.
 
 ## UM Settings
 1. UM Settings -> Appearance -> Registration Form -> "Really Simple CAPTCHA"
@@ -30,4 +30,4 @@ Extension to Ultimate Member for integration of the "Really Simple CAPTCHA" plug
 
 ## Updates
 1. Version 1.0.0
-2. Version 1.2.0 bug fix
+2. Version 1.3.0 bug fixes
