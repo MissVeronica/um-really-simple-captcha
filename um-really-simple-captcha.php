@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     Ultimate Member - Really Simple CAPTCHA
  * Description:     Extension to Ultimate Member for integration of the Really Simple CAPTCHA plugin.
- * Version:         1.1.0
+ * Version:         1.2.0
  * Requires PHP:    7.4
  * Author:          Miss Veronica
  * License:         GPL v2 or later
@@ -24,6 +24,13 @@ class UM_Really_Simple_CAPTCHA {
 
     function __construct() {
 
+        $this->captcha_instance = new ReallySimpleCaptcha();
+
+        $this->captcha_instance->tmp_dir = UM()->uploader()->get_upload_base_dir() . 'um-really-simple-captcha';
+        if ( ! file_exists( $this->captcha_instance->tmp_dir )) {
+            $this->captcha_instance->make_tmp_dir();
+        }
+
         add_filter( 'um_predefined_fields_hook',       array( $this, 'um_predefined_fields_really_simple_captcha' ), 10, 1 );
         add_action( 'um_submit_form_errors_hook',      array( $this, 'check_really_simple_captcha' ), 100, 1 );
         add_filter( "um_edit_label_{$this->meta_key}", array( $this, 'um_edit_label_really_simple_captcha' ), 10, 1 );
@@ -33,14 +40,7 @@ class UM_Really_Simple_CAPTCHA {
     public function um_edit_label_really_simple_captcha( $label ) {
 
         if ( UM()->fields()->set_mode == 'register' ) {
-
-            $this->captcha_instance = new ReallySimpleCaptcha();
-
-            $this->captcha_instance->tmp_dir = UM()->uploader()->get_upload_base_dir() . 'um-really-simple-captcha';
-            if ( ! file_exists( $this->captcha_instance->tmp_dir )) {
-                $this->captcha_instance->make_tmp_dir();
-            }
-    
+   
             $image_width = sanitize_text_field( UM()->options()->get( 'really_simple_captcha_image_width' ));
             if ( empty( $image_width ) || ! is_numeric( $image_width )) {
                 $image_width = 72;
@@ -126,7 +126,7 @@ class UM_Really_Simple_CAPTCHA {
 
     function check_really_simple_captcha( $args ) {
 
-        if ( UM()->fields()->set_mode == 'register' ) {
+        if ( $args['mode'] == 'register' ) {
 
             if ( ! isset( $args[$this->meta_key] ) || empty( $args[$this->meta_key] )) {
                 UM()->form()->add_error( $this->meta_key, __( 'Really Simple CAPTCHA empty', 'ultimate-member' ) );
