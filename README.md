@@ -1,6 +1,8 @@
 # UM Really Simple CAPTCHA
 Extension to Ultimate Member for integration of the "Really Simple CAPTCHA" plugin.
 
+https://imgur.com/a/K4EAPkV
+
 ## Installation
 1. Download the ZIP file and install as a WP Plugin.
 2. Activate the plugin.
