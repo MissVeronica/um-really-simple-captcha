@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     Ultimate Member - Really Simple CAPTCHA
  * Description:     Extension to Ultimate Member for integration of the Really Simple CAPTCHA plugin.
- * Version:         1.3.0
+ * Version:         1.4.0
  * Requires PHP:    7.4
  * Author:          Miss Veronica
  * License:         GPL v2 or later
@@ -10,7 +10,7 @@
  * Author URI:      https://github.com/MissVeronica
  * Text Domain:     ultimate-member
  * Domain Path:     /languages
- * UM version:      2.5.0
+ * UM version:      2.8.3
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -166,23 +166,26 @@ class UM_Really_Simple_CAPTCHA {
 
     public function um_settings_structure_really_simple_captcha( $settings_structure ) {
 
-        $settings_structure['appearance']['sections']['registration_form']['fields'][] =
+        $settings_structure['appearance']['sections']['registration_form']['form_sections']['really_simple_captcha']['title'] = 'Really Simple CAPTCHA';
+        $settings_structure['appearance']['sections']['registration_form']['form_sections']['really_simple_captcha']['description'] = 'Plugin version 1.4.0 - tested with UM 2.8.3';
+        
+        $settings_structure['appearance']['sections']['appearance']['registration_form']['form_sections']['really_simple_captcha']['fields'][] =
  
                 array(
                     'id'          => 'really_simple_captcha_characters',
                     'type'        => 'number',
-                    'label'       => __( 'Really Simple CAPTCHA - Number of Captcha challenge characters', 'ultimate-member' ),
-                    'tooltip'     => __( 'Enter the Number of characters in the Captcha challenge, default is four characters.', 'ultimate-member' ),
+                    'label'       => __( 'Number of Captcha challenge characters', 'ultimate-member' ),
+                    'description' => __( 'Enter the Number of characters in the Captcha challenge, default is four characters.', 'ultimate-member' ),
                     'size'        => 'small',
                 );
 
-        $settings_structure['appearance']['sections']['registration_form']['fields'][] =
+        $settings_structure['appearance']['sections']['registration_form']['form_sections']['really_simple_captcha']['fields'][] =
  
                 array(
                     'id'          => 'really_simple_captcha_word',
                     'type'        => 'select',
-                    'label'       => __( 'Really Simple CAPTCHA - Select Challenge Word characters', 'ultimate-member' ),
-                    'tooltip'     => __( 'Select the Captcha challenge characters to build the word.', 'ultimate-member' ),
+                    'label'       => __( 'Select Challenge Word characters', 'ultimate-member' ),
+                    'description' => __( 'Select the Captcha challenge characters to build the word.', 'ultimate-member' ),
                     'size'        => 'medium',
                     'options'     => array( 'default' => __( 'Default: ABCDEFGHJKLMNPQRSTUVWXYZ23456789', 'ultimate-member' ),
                                             'digit'   => __( 'At least one digit in the challenge word', 'ultimate-member' ),
@@ -190,83 +193,83 @@ class UM_Really_Simple_CAPTCHA {
                                             'digits'  => __( 'Only digits: 0123456789', 'ultimate-member' )),
                 );
 
-        $settings_structure['appearance']['sections']['registration_form']['fields'][] =
+        $settings_structure['appearance']['sections']['registration_form']['form_sections']['really_simple_captcha']['fields'][] =
  
                 array(
                     'id'          => 'really_simple_captcha_image_width',
                     'type'        => 'number',
-                    'label'       => __( 'Really Simple CAPTCHA - Width of the Captcha Image', 'ultimate-member' ),
-                    'tooltip'     => __( 'Enter the Width of the Captcha Image in pixels, default is 72 pixels.', 'ultimate-member' ),
+                    'label'       => __( 'Width of the Captcha Image', 'ultimate-member' ),
+                    'description' => __( 'Enter the Width of the Captcha Image in pixels, default is 72 pixels.', 'ultimate-member' ),
                     'size'        => 'small',
                 );
 
-        $settings_structure['appearance']['sections']['registration_form']['fields'][] =
+        $settings_structure['appearance']['sections']['registration_form']['form_sections']['really_simple_captcha']['fields'][] =
  
                 array(
                     'id'          => 'really_simple_captcha_image_height',
                     'type'        => 'number',
-                    'label'       => __( 'Really Simple CAPTCHA - Height of the Captcha Image', 'ultimate-member' ),
-                    'tooltip'     => __( 'Enter the Heigth of the Captcha Image in pixels, default is 24 pixels.', 'ultimate-member' ),
+                    'label'       => __( 'Height of the Captcha Image', 'ultimate-member' ),
+                    'description' => __( 'Enter the Heigth of the Captcha Image in pixels, default is 24 pixels.', 'ultimate-member' ),
                     'size'        => 'small',
                 );
 
-        $settings_structure['appearance']['sections']['registration_form']['fields'][] =
+        $settings_structure['appearance']['sections']['registration_form']['form_sections']['really_simple_captcha']['fields'][] =
 
                 array(
                     'id'          => 'really_simple_captcha_backgr_color',
                     'type'        => 'text',
-                    'label'       => __( 'Really Simple CAPTCHA - Captcha Image Background Color', 'ultimate-member' ),
-                    'tooltip'     => __( 'Enter the Captcha Image Background Color in HEX notation like #ffffff and #00000 represents White and Black.', 'ultimate-member' ),
+                    'label'       => __( 'Captcha Image Background Color', 'ultimate-member' ),
+                    'description' => __( 'Enter the Captcha Image Background Color in HEX notation like #ffffff and #00000 represents White and Black.', 'ultimate-member' ),
                     'size'        => 'small',
                 );
 
-        $settings_structure['appearance']['sections']['registration_form']['fields'][] =
+        $settings_structure['appearance']['sections']['registration_form']['form_sections']['really_simple_captcha']['fields'][] =
 
                 array(
                     'id'          => 'really_simple_captcha_text_color',
                     'type'        => 'text',
-                    'label'       => __( 'Really Simple CAPTCHA - Captcha challenge text Color', 'ultimate-member' ),
-                    'tooltip'     => __( 'Enter the Captcha challenge text Color in HEX notation like #ffffff and #00000 represents White and Black.', 'ultimate-member' ),
+                    'label'       => __( 'Captcha challenge text Color', 'ultimate-member' ),
+                    'description' => __( 'Enter the Captcha challenge text Color in HEX notation like #ffffff and #00000 represents White and Black.', 'ultimate-member' ),
                     'size'        => 'small',
                 );
 
-        $settings_structure['appearance']['sections']['registration_form']['fields'][] =
+        $settings_structure['appearance']['sections']['registration_form']['form_sections']['really_simple_captcha']['fields'][] =
  
                 array(
                     'id'          => 'really_simple_captcha_image_coord_x',
                     'type'        => 'number',
-                    'label'       => __( 'Really Simple CAPTCHA - X Coordinate for the first Captcha character', 'ultimate-member' ),
-                    'tooltip'     => __( 'Enter the X Coordinate horizontal for the first Captcha character, default is 6 pixels.', 'ultimate-member' ),
+                    'label'       => __( 'X Coordinate for the first Captcha character', 'ultimate-member' ),
+                    'description' => __( 'Enter the X Coordinate horizontal for the first Captcha character, default is 6 pixels.', 'ultimate-member' ),
                     'size'        => 'small',
                 );
 
-        $settings_structure['appearance']['sections']['registration_form']['fields'][] =
+        $settings_structure['appearance']['sections']['registration_form']['form_sections']['really_simple_captcha']['fields'][] =
 
                 array(
                     'id'          => 'really_simple_captcha_image_coord_y',
                     'type'        => 'number',
-                    'label'       => __( 'Really Simple CAPTCHA - Y Coordinate for the first Captcha character', 'ultimate-member' ),
-                    'tooltip'     => __( 'Enter the Y Coordinate vertical for the first Captcha character, default is 18 pixels.', 'ultimate-member' ),
+                    'label'       => __( 'Y Coordinate for the first Captcha character', 'ultimate-member' ),
+                    'description' => __( 'Enter the Y Coordinate vertical for the first Captcha character, default is 18 pixels.', 'ultimate-member' ),
                     'size'        => 'small',
                 );
 
-        $settings_structure['appearance']['sections']['registration_form']['fields'][] =
+        $settings_structure['appearance']['sections']['registration_form']['form_sections']['really_simple_captcha']['fields'][] =
 
                 array(
                     'id'          => 'really_simple_captcha_font_size',
                     'type'        => 'number',
-                    'label'       => __( 'Really Simple CAPTCHA - Captcha character Font Size', 'ultimate-member' ),
-                    'tooltip'     => __( 'Enter the Captcha character Font Size in pixels, default value is 14.', 'ultimate-member' ),
+                    'label'       => __( 'Captcha character Font Size', 'ultimate-member' ),
+                    'description' => __( 'Enter the Captcha character Font Size in pixels, default value is 14.', 'ultimate-member' ),
                     'size'        => 'small',
                 );
 
-        $settings_structure['appearance']['sections']['registration_form']['fields'][] =
+        $settings_structure['appearance']['sections']['registration_form']['form_sections']['really_simple_captcha']['fields'][] =
 
                 array(
                     'id'          => 'really_simple_captcha_font_width',
                     'type'        => 'number',
-                    'label'       => __( 'Really Simple CAPTCHA - Captcha character Font Width', 'ultimate-member' ),
-                    'tooltip'     => __( 'Enter the Captcha character Font Width in pixels, default value is 15.', 'ultimate-member' ),
+                    'label'       => __( 'Captcha character Font Width', 'ultimate-member' ),
+                    'description' => __( 'Enter the Captcha character Font Width in pixels, default value is 15.', 'ultimate-member' ),
                     'size'        => 'small',
                 );
 
@@ -276,3 +279,4 @@ class UM_Really_Simple_CAPTCHA {
 }
 
 new UM_Really_Simple_CAPTCHA();
+
