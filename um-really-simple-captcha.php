@@ -166,8 +166,8 @@ class UM_Really_Simple_CAPTCHA {
 
     public function um_settings_structure_really_simple_captcha( $settings_structure ) {
 
-        $settings_structure['appearance']['sections']['registration_form']['form_sections']['really_simple_captcha']['title'] = 'Really Simple CAPTCHA';
-        $settings_structure['appearance']['sections']['registration_form']['form_sections']['really_simple_captcha']['description'] = 'Plugin version 1.4.0 - tested with UM 2.8.3';
+        $settings_structure['appearance']['sections']['registration_form']['form_sections']['really_simple_captcha']['title']       = __( 'Really Simple CAPTCHA', 'ultimate-member' );
+        $settings_structure['appearance']['sections']['registration_form']['form_sections']['really_simple_captcha']['description'] = __( 'Plugin version 1.4.0 - tested with UM 2.8.3', 'ultimate-member' );
         
         $settings_structure['appearance']['sections']['registration_form']['form_sections']['really_simple_captcha']['fields'][] =
  
