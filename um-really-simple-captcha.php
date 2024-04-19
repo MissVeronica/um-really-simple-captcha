@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     Ultimate Member - Really Simple CAPTCHA
  * Description:     Extension to Ultimate Member for integration of the Really Simple CAPTCHA plugin.
- * Version:         1.4.0
+ * Version:         1.5.0
  * Requires PHP:    7.4
  * Author:          Miss Veronica
  * License:         GPL v2 or later
@@ -10,7 +10,7 @@
  * Author URI:      https://github.com/MissVeronica
  * Text Domain:     ultimate-member
  * Domain Path:     /languages
- * UM version:      2.8.3
+ * UM version:      2.8.5
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -21,6 +21,7 @@ class UM_Really_Simple_CAPTCHA {
 
     public $captcha_instance = false;
     public $meta_key         = 'really_simple_captcha';
+    public $label            = '';
 
     function __construct() {
 
@@ -35,6 +36,19 @@ class UM_Really_Simple_CAPTCHA {
         add_action( 'um_submit_form_errors_hook',      array( $this, 'check_really_simple_captcha' ), 100, 1 );
         add_filter( "um_edit_label_{$this->meta_key}", array( $this, 'um_edit_label_really_simple_captcha' ), 10, 1 );
         add_filter( 'um_settings_structure',           array( $this, 'um_settings_structure_really_simple_captcha' ), 10, 1 );
+
+        if ( version_compare( UM_VERSION, '2.8.4', '>' ) ) {
+            add_filter( 'esc_html',                    array( $this, 'um_esc_html_really_simple_captcha' ), 10, 2 );
+        }
+    }
+
+    public function um_esc_html_really_simple_captcha( $safe_text, $text ) {
+
+        if ( $text == '#Really#Simple#CAPTCHA#' ) {
+            $safe_text = $this->label;
+        }
+
+        return $safe_text;
     }
 
     public function um_edit_label_really_simple_captcha( $label ) {
@@ -113,12 +127,16 @@ class UM_Really_Simple_CAPTCHA {
         $url = home_url( str_replace( ABSPATH, '', $this->captcha_instance->tmp_dir . DIRECTORY_SEPARATOR . $image ));
         $title = __( 'CAPTCHA challenge image', 'ultimate-member' );
 
-        $label = '<div class="um-really-simple-captcha">
-                      <img class="um-really-simple-captcha-img" src="' . esc_url( $url ) . '" alt="CAPTCHA" title="' . esc_attr( $title ) . '">
-                  </div>' . esc_attr( $label ) . 
-                 '<input type="hidden" name="really_simple_captcha_prefix" id="really_simple_captcha_prefix" value="' . esc_attr( $prefix ) . '" />';
+        $this->label = '<div class="um-really-simple-captcha">
+                        <img class="um-really-simple-captcha-img" src="' . esc_url( $url ) . '" alt="CAPTCHA" title="' . esc_attr( $title ) . '">
+                        </div>' . esc_attr( $label ) . 
+                       '<input type="hidden" name="really_simple_captcha_prefix" id="really_simple_captcha_prefix" value="' . esc_attr( $prefix ) . '" />';
 
-        return $label;
+        if ( version_compare( UM_VERSION, '2.8.5', '<' ) ) {
+            return $this->label;
+        }
+
+        return '#Really#Simple#CAPTCHA#';
     }
 
     function check_really_simple_captcha( $args ) {
@@ -279,4 +297,5 @@ class UM_Really_Simple_CAPTCHA {
 }
 
 new UM_Really_Simple_CAPTCHA();
+
 
