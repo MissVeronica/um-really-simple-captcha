@@ -34,3 +34,4 @@ https://imgur.com/a/K4EAPkV
 1. Version 1.0.0
 2. Version 1.3.0 bug fixes
 3. Version 1.4.0 Updated for UM 2.8.3
+4. Version 1.5.0 Updated for UM 2.8.5
