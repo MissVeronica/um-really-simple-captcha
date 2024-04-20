@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     Ultimate Member - Really Simple CAPTCHA
  * Description:     Extension to Ultimate Member for integration of the Really Simple CAPTCHA plugin.
- * Version:         1.5.0
+ * Version:         1.5.1
  * Requires PHP:    7.4
  * Author:          Miss Veronica
  * License:         GPL v2 or later
@@ -36,16 +36,13 @@ class UM_Really_Simple_CAPTCHA {
         add_action( 'um_submit_form_errors_hook',      array( $this, 'check_really_simple_captcha' ), 100, 1 );
         add_filter( "um_edit_label_{$this->meta_key}", array( $this, 'um_edit_label_really_simple_captcha' ), 10, 1 );
         add_filter( 'um_settings_structure',           array( $this, 'um_settings_structure_really_simple_captcha' ), 10, 1 );
-
-        if ( version_compare( UM_VERSION, '2.8.4', '>' ) ) {
-            add_filter( 'esc_html',                    array( $this, 'um_esc_html_really_simple_captcha' ), 10, 2 );
-        }
     }
 
     public function um_esc_html_really_simple_captcha( $safe_text, $text ) {
 
         if ( $text == '#Really#Simple#CAPTCHA#' ) {
             $safe_text = $this->label;
+            remove_filter( 'esc_html', array( $this, 'um_esc_html_really_simple_captcha' ), 10, 2 );
         }
 
         return $safe_text;
@@ -136,6 +133,7 @@ class UM_Really_Simple_CAPTCHA {
             return $this->label;
         }
 
+        add_filter( 'esc_html', array( $this, 'um_esc_html_really_simple_captcha' ), 10, 2 );
         return '#Really#Simple#CAPTCHA#';
     }
 
@@ -297,5 +295,3 @@ class UM_Really_Simple_CAPTCHA {
 }
 
 new UM_Really_Simple_CAPTCHA();
-
-
